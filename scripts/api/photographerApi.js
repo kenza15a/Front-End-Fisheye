@@ -15,3 +15,17 @@ export default class photographerApi{
     }
 
 }
+
+
+export  class mediaApi extends photographerApi {
+    constructor(url) {
+        super(url)
+    }
+    async getAllMedia() {
+        return await this.getAllPhotographer()
+    }
+ 
+
+}
+
+
