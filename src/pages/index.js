@@ -11,7 +11,7 @@ export default class index{
 
         /*fetch*/
         const photographersSection = document.querySelector(".photographer_section");
-        const url = "./data/photographers.json";
+        const url = "../data/photographers.json";
         const api2 = new photographerApi(url);
         const photographersData = api2.getAllPhotographer();
     
