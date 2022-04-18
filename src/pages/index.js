@@ -3,22 +3,22 @@
 import photographerApi from "../api/photographerApi.js";
 import photographerFactory from "../factories/photographerFactory.js";
 
-export default class index{
-    constructor(){
+export default class index {
+    constructor() {
 
     }
-   async getPhotographers() {
+    async getPhotographers() {
 
         /*fetch*/
         const photographersSection = document.querySelector(".photographer_section");
         const url = "../data/photographers.json";
         const api2 = new photographerApi(url);
         const photographersData = api2.getAllPhotographer();
-    
+
         return photographersData;
     }
-    
-    async displayData(photographers) { 
+
+    async displayData(photographers) {
         const photographersSection = document.querySelector(".photographer_section");
         photographers.forEach((photographer) => {
             const photographersF = new photographerFactory(photographer);
@@ -26,7 +26,7 @@ export default class index{
             photographersSection.appendChild(userCardDOM);
         });
     }
-    
+
     async init() {
         // Récupère les datas des photographes
         const { photographers } = await this.getPhotographers();
@@ -35,3 +35,6 @@ export default class index{
     //init();
 }
 
+const indexhtml = new index();
+//indexhtml.getPhotographers(); //dupplicate
+indexhtml.init();

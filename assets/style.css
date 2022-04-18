@@ -7,11 +7,15 @@ body {
 
 
 header {
+   
+    height: 90px;
+}
+header nav{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 90px;
+    margin-top: 20px;
 }
 
 h1 {
@@ -39,9 +43,10 @@ h1 {
     flex-direction: column;
 }
 
-.photographer_section article h2 {
+.photographer_section article a h2 {
     color: #D3573C;
     font-size: 36px;
+    line-height: 40px;
 }
 
 .photographer_section article img {
@@ -56,13 +61,18 @@ h1 {
 line-height: 4px;
 text-align: center;
 }
+
 .card a{
     text-decoration: none;
     color: black;
 }
 .location{
     color: #D3573C;
+    font-size: 17px;
     
+}
+.tagline{
+    font-weight: 150;
 }
 .price{
 color:gray;
