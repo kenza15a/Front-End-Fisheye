@@ -1,5 +1,30 @@
 #contact_modal {
     display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(244, 245, 251, 0.8);
+}
+
+
+  #sendbutton{
+      margin-top: 0;
+  }
+
+#contact_modal div{
+    margin-top: 25px;
+}
+
+.modal form{
+    margin-top: 100px;
+}
+.modal form label{
+    font-size: 25px;
+
 }
 
 .photograph-header {
@@ -29,7 +54,7 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 100px;
+    /*margin-top: 0px;*/
 }
 
 .modal {
@@ -54,9 +79,9 @@
 }
 
 .modal header h2 {
-    font-size: 64px;
+    text-align: left;
+    font-size: 54px;
     font-weight: normal;
-    text-align: center;
 }
 
 form {
@@ -68,7 +93,8 @@ form {
 
 form label {
     color: #312E2E;
-    font-size: 36px;
+    font-size: 25px;
+    margin-bottom: 0;
 }
 
 form div {
@@ -77,21 +103,33 @@ form div {
     width: 100%;
     align-items: self-start;
     margin-bottom: 26px;
+    margin-top: 15px;
 }
 
 form input {
+    margin-top: 5px;
     width: 100%;
     height: 68px;
     border: none;
     border-radius: 5px;
+    font-size: 20px;
+}
+form textarea {
+    margin-top: 5px;
+    padding-top: 5px;
+    width: 100%;
+    height: 150px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    font-family: "DM Sans",sans-serif;
 }
 
 .closebutton {
-
     float: right;
-    top: 10px;
-    height: 15px;
-    width: 15px;
+    top: 15px;
+    height: 35px;
+    width: 35px;
 }
 
 .profile_pic {
@@ -120,6 +158,9 @@ form input {
     grid-column-gap: 20px;
     grid-row-gap: 20px;
     margin: 35px 100px 100px;
+}
+.photograph-media a{
+    text-decoration: none;
 }
 
 .media-wrapper {

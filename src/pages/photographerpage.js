@@ -4,6 +4,7 @@ import mediaFactory from "../factories/mediaFactory.js";
 import photographerApi from "../api/photographerApi.js";
 //impoter lapi pour un fetch des media
 import mediaApi from "../api/mediaApi.js";
+import contactForm from "../utils/contactForm.js";
 
 export default class photographerPage {
 
@@ -27,10 +28,7 @@ export default class photographerPage {
         }
 
         const photographerHeader = document.querySelector(".photograph-header");
-
         const header = document.createElement('section');// creation de la section header 
-
-
         header.classList.add("headerCard");//css
         //insertion du html
         header.innerHTML = `
@@ -39,13 +37,20 @@ export default class photographerPage {
                 <h4 class="location">${infos.city},${infos.country}</h4>
                 <h5 class="tagline">${infos.tagline}</h5>
                 </div>
-                <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-                <img class="profile_pic" src="assets/photographers/Photographers ID Photos/${infos.portrait}">`;
+                <button class="contact_button">Contactez-moi</button>
+                <img role="img" alt="photo de ${infos.name}"class="profile_pic" src="assets/photographers/Photographers ID Photos/${infos.portrait}">`;
+
+        //append le header
         photographerHeader.appendChild(header);
         //var infos = { id, name, city, country, tagline, portrait };
+        //recuperer le bouton contactez-moi
+        const contactButton = document.querySelector(".contact_button");
+        return { infos, contactButton };
+    }
 
-        return infos;
-
+    getContactForm() {
+        const contact = new contactForm();
+        return contact;
 
     }
 
@@ -84,43 +89,59 @@ export default class photographerPage {
             }
             //console.log(url);
             var mediaDom = (await NewMediafactory.getMediaDom(url)).article;
-            mediaSection.appendChild(mediaDom);
+            var a = document.createElement("a");
+            a.href = url;
+            a.appendChild(mediaDom);
+            mediaSection.appendChild(a);
         }
 
     }
     /*print likes and price*/
-    getCounters(tabMedia,infos){
+    getCounters(tabMedia, infos) {
         const counterSection = document.querySelector('.bottom-counters');
-        var likes=0;
+        var likes = 0;
         for (let i = 0; i < tabMedia.length; i++) {
-          
-         likes= tabMedia[i].likes+likes;
+
+            likes = tabMedia[i].likes + likes;
         }
-        const price=infos.price;
-        const divCounter=document.createElement('div');
-        divCounter.innerHTML=` <i class="fa-solid fa-heart"></i> ${likes} , ${price}€/jours`;
+        const price = infos.price;
+        const divCounter = document.createElement('div');
+        divCounter.innerHTML = ` <i class="fa-solid fa-heart"></i> ${likes} , ${price}€/jours`;
         divCounter.classList.add("div-counter");
         counterSection.appendChild(divCounter);
+        console.log("nombre total de likes");
+        console.log(likes + " likes");
         console.log("prix du photographe actuel");
-        console.log(price+ "likes");
-        console.log("prix du photographe actuel");
-        console.log(price+"€/jours");
-        return{likes ,price};
-        
+        console.log(price + "€/jours");
+        return { likes, price };
+
 
     }
 
     /*methode renderPage*/
     async renderPage() {
-        const info = await this.generateHeader();
+        const header1 = await this.generateHeader();
+        const info = header1.infos;
+        const contactButton = header1.contactButton;
         const data = page.getMedia(info.name);
-        const counters= (await data).tabMedia;
+        const counters = (await data).tabMedia;
         this.displayMedia(data);
-        this.getCounters(counters,info);
+        this.getCounters(counters, info);
+
+        const contactF = this.getContactForm();//instance du formulaire
+        const Modal = await contactF.buildModal();
+        contactButton.addEventListener("click", function () { contactF.displayModal() });
+        //(await Modal).modalContent;
+        const contactTab = Modal.contactInfos;
+        const sendButton = Modal.sendButton;
+        contactF.sendInfos(contactTab, sendButton);
+
+
     }
 }
 
 const page = new photographerPage();
 page.renderPage();
+
 
 

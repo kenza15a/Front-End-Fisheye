@@ -14,7 +14,7 @@
 
 <body>
   <header>
-    <nav><a href="index.html"><img src="assets/images/logo.png" alt="logo fisheye" class="logo" /></a></nav>
+    <nav aria-label="Main navigation"><a href="index.html"><img src="assets/images/logo.png" alt="logo fisheye" class="logo" /></a></nav>
 
   </header>
   <main id="main">
@@ -30,40 +30,21 @@
       </div>
     </div>
 
-    <div class="photograph-media">
+    <div class="photograph-media" name="photograph-media">
 
     </div>
 
 
   </main>
-  <div class="bottom-counters">
-   
   
+  <div class="bottom-counters">
   </div>
   <div id="contact_modal">
-    <div class="modal">
-      <header>
-        <img class="closebutton" src="assets/icons/close.svg" onclick="closeModal()" />
-        <h2>Contactez-moi</h2>
-      </header>
-      <form>
-        <div>
-          
-          <label for="first">Prénom</label><br>
-          <input type="text" id="first" name="first" /><br>
-          <label for="last">Nom</label><br>
-          <input type="text" id="last" name="last" /><br>
-          <label for="email">E-mail</label><br>
-          <input  id="email" name="email" /><br>
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" cols="33"></textarea>
-        </div>
-        <button class="contact_button">Envoyer</button>
-      </form>
-    </div>
+  
   </div>
-  <script type="module" src="../src/utils/contactForm.js"></script>
-  <script type="module" src="../src/pages/photographerpage1.js"></script>
+  
   </body>
-
+  <script type="module" src="../src/utils/contactForm.js"></script>
+  <script type="module" src="../src/pages/photographerpage.js"></script>
+  <script type="module" src="../src/utils/lightbox.js" defer></script>
 </html>

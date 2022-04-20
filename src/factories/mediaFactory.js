@@ -6,6 +6,7 @@ export default class mediaFactory {
     getMediaDom(pictureUrl) {
         const { id, photographerId, title, image, likes, date, price } = this._media;
         const article = document.createElement('article');
+        article.classList.add("media-wrapper");
         // const thumbnail = `assets/photographers/Photographers ID Photos/${portrait}`;
         //trouver le chemin de la photo
         const mediaType = pictureUrl.split('.');
@@ -13,12 +14,10 @@ export default class mediaFactory {
        if(mediaType[mediaType.length-1]=='jpg') 
        {
         article.innerHTML = `
-        <div class="media-wrapper">
         <img class="media" src="${pictureUrl}" alt="${title}">
         <div class="media-infos">
          <p class="media-title">${title}</P>
          <span class="likes"><i class="fa-solid fa-heart"></i>${likes}</span>
-        </div>
         </div>
        `
 
@@ -37,8 +36,9 @@ export default class mediaFactory {
        `
 
        }
+       var likesButton=document.getElementsByClassName("likes");
       
-        return { id, photographerId, article }
+        return { id, photographerId, article,likesButton }
     }
 
 }
