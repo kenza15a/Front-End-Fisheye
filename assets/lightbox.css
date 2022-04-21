@@ -44,7 +44,7 @@
 .lightbox button{
     background-color: transparent;
     border: none;
-    opacity: 0.5;
+    opacity: 0.8;
     transition: opacity .3s;
 }
 .lightbox button:hover{
@@ -60,8 +60,8 @@
 }
 .lightbox__container img{
     
-    object-fit: fill;
-    height: max-content;
+    object-fit: cover;
+    height: 70vh;
     max-width: 100%;
     animation: lightboxIn 0.5s;
     

@@ -48,7 +48,7 @@ export default class lightbox {
         //forcer l'arret au bout de 500ms
         window.setTimeout(() => { lightboxOpendened.remove() }, 500);
         //supprime levent keyup apres avooir fermer la fenetre
-        document.removeEventListener('keyup', this.onKeyUp);
+        document.removeEventListener('keyup', this.onKeyUp(e));
 
     }
 
@@ -99,7 +99,7 @@ export default class lightbox {
     }
 
     buildDom(url) {
-
+        this.url=url;
         const domLightbox = document.createElement("div");
         domLightbox.classList.add("lightbox");
         domLightbox.innerHTML = `
