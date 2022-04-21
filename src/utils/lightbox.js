@@ -75,15 +75,18 @@ export default class lightbox {
      */
     next(e) {
         e.preventDefault();
-
         //trouver l'indice de l'image affichée 
         var i = this.images.findIndex(image => image === this.url);
         alert("next clicked new url bellow");
         alert(this.images[i + 1]);
+        s// verifier si on a pas depasser le nombre des images dans la lightbox pour revenir au 0
+        if(i=== this.images.length-1){
+            i=-1;
+        }
         let newUrl = this.images[i + 1];
-        //vide le container avant de l'inserer de nouveau
+        //vider le container avant de l'inserer de nouveau
         const lightboxContainer = this.element.querySelector(".lightbox__container");
-        lightboxContainer.innerHTML = ``;
+        lightboxContainer.innerHTML = "";
         this.buildDom(newUrl);
 
     }

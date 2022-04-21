@@ -90,10 +90,10 @@ export default class photographerPage {
             }
             //console.log(url);
             var mediaDom = (await NewMediafactory.getMediaDom(url)).article;
-            var a = document.createElement("a");
+            /*var a = document.createElement("a");
             a.href = url;
-            a.appendChild(mediaDom);
-            mediaSection.appendChild(a);
+            a.appendChild(mediaDom);*/
+            mediaSection.appendChild(mediaDom);
         }
 
     }

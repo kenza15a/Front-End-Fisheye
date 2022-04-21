@@ -153,20 +153,22 @@ form textarea {
 .photograph-media {
     width: 90vw;
     padding: 10px;
-    display: grid;
-    grid-template-columns: repeat(3, 350px);
-    grid-column-gap: 60px;
-    grid-row-gap: 20px;
-    /*margin: 35px 100px 100px;*/
-    margin:35px 150px 120px;
+    /*display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;*/
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    margin: 35px 100px 100px;
 }
 a{
     text-decoration: none;
 }
 
-article .media-wrapper {
-    height: 200px;
-    /*width: 30%;*/
+.media-wrapper {
+    height: 450px;
+    width: 30%;
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
@@ -176,10 +178,11 @@ article .media-wrapper {
 .media {
     object-fit: cover;
     height: 70%;
-    width: 100%;
+    max-width: 100%;
 }
 
 .media-infos {
+    height:20%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
