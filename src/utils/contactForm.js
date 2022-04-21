@@ -36,14 +36,6 @@ export default class contactForm {
         const modal = document.getElementById("contact_modal");
         modal.style.display = "none";
     }
-    //imprimer le contenu du formulaire
-    printContactInfo(contactInfos) {
-        console.log("informations de contact");
-        console.log("Prénom" + contactInfos[0]);
-        console.log("Nom" + contactInfos[1]);
-        console.log("E-mail" + contactInfos[2]);
-        console.log("Message" + contactInfos[3]);
-    }
 
     async buildModal() {
         const id = this.photographerId;
@@ -53,7 +45,7 @@ export default class contactForm {
         const modalContent = document.getElementById("contact_modal");
         const contactFormDiv = document.createElement("div");
         contactFormDiv.classList.add("modal");
-        contactFormDiv.setAttribute("role","dialog"); //accessiblité
+        contactFormDiv.setAttribute("role", "dialog"); //accessiblité
         contactFormDiv.innerHTML = `
        
         <header>
@@ -80,16 +72,6 @@ export default class contactForm {
 `;
         //apendchild
         modalContent.appendChild(contactFormDiv);
-
-        //recuperer les composant du formulaire
-        const firstName = document.getElementById("first").value;
-        const lastName = document.getElementById("last").value;
-        const email = document.getElementById("email").value;
-        const message = document.getElementById("message").value;
-
-
-        //tableau des informations de contact
-        const contactInfos = [firstName, lastName, email, message];
         const closeButton = document.querySelector(".closebutton");
         closeButton.addEventListener("click", () => {
             this.closeModal()
@@ -97,13 +79,28 @@ export default class contactForm {
         /*("click",
             function () { modalContent.style.display = "none"; });*/
         const sendButton = document.getElementById("sendButton");
-        return { modalContent, contactInfos, sendButton };
+        return { modalContent, sendButton };
     }
 
-    sendInfos(contactInfos, sendButton) {
+    sendInfos(sendButton) {
         sendButton.addEventListener("click", (e) => {
-        e.preventDefault();
-            this.printContactInfo(contactInfos);
+            e.preventDefault();
+            //recuperer les composant du formulaire
+            const contactObj = {
+                firstName: document.getElementById("first").value,
+                lastName: document.getElementById("last").value,
+                email: document.getElementById("email").value,
+                message: document.getElementById("message").value
+            }
+            //console.log(contactObj);
+            //imprimer le contenu du formulaire
+
+            console.log("informations de contact ");
+            console.log("Prénom " + contactObj.firstName);
+            console.log("Nom " + contactObj.lastName);
+            console.log("E-mail " + contactObj.email);
+            console.log("Message " + contactObj.message);
+
         });
 
 

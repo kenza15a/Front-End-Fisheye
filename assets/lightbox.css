@@ -4,7 +4,7 @@
     left:0;
     width:100%;
     height: 100%;
-    background-color: rgba(0,0,0,.9);
+    background-color: rgba(11, 11, 11, 0.5);
     z-index: 10;
     overflow: auto;/*scrol image if it's big*/
     animation: lightboxIn 0.5s;
@@ -51,8 +51,8 @@
     opacity: 1;
 }
 .lightbox__container{
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,13 +60,27 @@
 }
 .lightbox__container img{
     
-    object-fit: cover;
-    height: auto;
+    object-fit: fill;
+    height: max-content;
     max-width: 100%;
     animation: lightboxIn 0.5s;
     
 }
 
+
+.lightbox__loader{
+
+    width:38px;
+    height:38px;
+    opacity:0.5;
+    background: url("../public/svg/loader.svg");
+    color: #DB8876 ;
+
+}
+
+.close__lightbox{
+    display: none;
+}
 
 /*animations*/
 @keyframes lighboxIn{

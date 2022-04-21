@@ -5,6 +5,7 @@ import photographerApi from "../api/photographerApi.js";
 //impoter lapi pour un fetch des media
 import mediaApi from "../api/mediaApi.js";
 import contactForm from "../utils/contactForm.js";
+import lightbox from "../utils/lightbox.js";
 
 export default class photographerPage {
 
@@ -132,10 +133,11 @@ export default class photographerPage {
         const Modal = await contactF.buildModal();
         contactButton.addEventListener("click", function () { contactF.displayModal() });
         //(await Modal).modalContent;
-        const contactTab = Modal.contactInfos;
+       // const contactTab = Modal.contactInfos;
         const sendButton = Modal.sendButton;
-        contactF.sendInfos(contactTab, sendButton);
-
+        contactF.sendInfos(sendButton);
+        //initialiser le lightbox
+        lightbox.init();
 
     }
 }

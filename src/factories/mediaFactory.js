@@ -24,14 +24,13 @@ export default class mediaFactory {
        }else{
           
         article.innerHTML = `
-        <div class="media-wrapper">
+        
         <video  preload="metadata">
        <source src="${pictureUrl}#t=0.5" type="video/mp4">
        </video>
         <div class="media-infos">
          <p class="media-title">${title}</P>
          <span class="likes"><i class="fa-solid fa-heart"></i>${likes}</span>
-        </div>
         </div>
        `
 
