@@ -25,11 +25,11 @@ export default class mediaFactory {
 
         } else {
 
-            article.innerHTML = `
+        article.innerHTML = `
         <a href="${pictureUrl}">
         <video  preload="metadata" class="media">
-       <source src="${pictureUrl}#t=0.5" type="video/mp4">
-       </video>
+           <source src="${pictureUrl}#t=0.5" type="video/mp4">
+        </video>
        </a>
         <div class="media-infos">
          <p class="media-title">${title}</P>
@@ -38,8 +38,7 @@ export default class mediaFactory {
        `
 
         }
-        var likesButton = document.getElementsByClassName("likes");
-
+        var likesButton = document.querySelector(".likes");
         return { id, photographerId, article, likesButton }
     }
 

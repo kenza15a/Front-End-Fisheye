@@ -48,7 +48,7 @@ export default class lightbox {
         //forcer l'arret au bout de 500ms
         window.setTimeout(() => { lightboxOpendened.remove() }, 500);
         //supprime levent keyup apres avooir fermer la fenetre
-        document.removeEventListener('keyup', this.onKeyUp(e));
+        document.removeEventListener('keyup', this.onKeyUp);
 
     }
 
@@ -77,17 +77,17 @@ export default class lightbox {
         e.preventDefault();
         //trouver l'indice de l'image affichée 
         var i = this.images.findIndex(image => image === this.url);
-        alert("next clicked new url bellow");
-        alert(this.images[i + 1]);
-        s// verifier si on a pas depasser le nombre des images dans la lightbox pour revenir au 0
-        if(i=== this.images.length-1){
-            i=-1;
+        console.log(this.images[i + 1]);
+        // verifier si on a pas depasser le nombre des images dans la lightbox pour revenir au 0
+        if (i === this.images.length - 1) {
+            i = -1;
         }
         let newUrl = this.images[i + 1];
         //vider le container avant de l'inserer de nouveau
         const lightboxContainer = this.element.querySelector(".lightbox__container");
         lightboxContainer.innerHTML = "";
-        this.buildDom(newUrl);
+        //this.buildDom(newUrl);
+        new lightbox(newUrl, this.images);
 
     }
     //image precedente
@@ -97,12 +97,23 @@ export default class lightbox {
     prev(e) {
 
         e.preventDefault();
-        alert("prev clicked new url bellow");
+        // alert("prev clicked new url bellow");
+        var i = this.images.findIndex(image => image === this.url);
+        if (i === 0) {
+            i = this.images.length;
+        }
+        let newUrl = this.images[i - 1];
+        //vider le container avant de l'inserer de nouveau
+        const lightboxContainer = this.element.querySelector(".lightbox__container");
+        lightboxContainer.innerHTML = "";
+        /*this.buildDom(newUrl);*/
+
+        new lightbox(newUrl, this.images);
 
     }
 
     buildDom(url) {
-        this.url=url;
+        this.url = url;
         const domLightbox = document.createElement("div");
         domLightbox.classList.add("lightbox");
         domLightbox.innerHTML = `
@@ -112,6 +123,30 @@ export default class lightbox {
         <div class="lightbox__container">
             <img src="${url}" alt="image lightbox">
         </div>`;
+
+
+        const lightboxContainer = document.createElement("div");
+        lightboxContainer.classList.add("lightbox__container");
+
+        //split url
+        let urlParts = url.split("/");
+        let fullTitle = urlParts[5];
+        let title = fullTitle.split(".")[0];
+        console.log(title);
+        //verifier si le fichier est une image ou une video
+        if (/\.(jpg)$/.test(url))//(url.match(/\.(jpg)$/)) { ///faq$/.test
+            //put image in container
+            {lightboxContainer.innerHTML = `<img src="${url}" alt="image lightbox" title="${title}"></br>
+            <h4 class="image__title">${title}</h4>`;
+
+        }
+        else {
+            //alert("it's a video");
+            lightboxContainer.innerHTML = `
+            <video controls>
+            <source src="${url}" type="video/mp4">
+            </video>`;
+        }
         //close
         domLightbox.querySelector('.lightbox__Close').addEventListener('click',
             this.close.bind(this));

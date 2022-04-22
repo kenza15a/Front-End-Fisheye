@@ -90,11 +90,18 @@ export default class photographerPage {
             }
             //console.log(url);
             var mediaDom = (await NewMediafactory.getMediaDom(url)).article;
+            var id = (await NewMediafactory.getMediaDom(url)).id;
+            var likesButton = (await NewMediafactory.getMediaDom(url)).likesButton;
+
+
             /*var a = document.createElement("a");
             a.href = url;
             a.appendChild(mediaDom);*/
             mediaSection.appendChild(mediaDom);
+            //console.log(id);
         }
+    
+        return(id,likesButton);
 
     }
     /*print likes and price*/
@@ -119,22 +126,44 @@ export default class photographerPage {
 
     }
     //method add likes when clicked*/
+    addLikes(tabMedia, mediaId) {
+        //flag des likes si le bouton est cliqué ou pas
+      // let clicked=false;
+        for (let i = 0; i < tabMedia.length; i++) {
+            if (tabMedia[i] == mediaId) {
+                tabMedia[i].likes = +1;
+              //  clicked=true;
+            }
+            break;
+        }
+       //return  clicked;
+
+
+    }
+
 
     /*methode renderPage*/
     async renderPage() {
-        const header1 = await this.generateHeader();
-        const info = header1.infos;
-        const contactButton = header1.contactButton;
-        const data = page.getMedia(info.name);
+        const generatedHeader = await this.generateHeader();
+        const info = generatedHeader.infos;
+        const contactButton = generatedHeader.contactButton;
+        const data = this.getMedia(info.name);
         const counters = (await data).tabMedia;
-        this.displayMedia(data);
-        this.getCounters(counters, info);
+        const display=this.displayMedia(data);
+        let mediaId=display.id;
+        let likesButton=display.likesButton;
+        //likesButton = document.querySelector(".likes");
+        likesButton.addEventListener("click", () => {
+            this.addLikes(counters,id);
+        });
 
+        /*contact modal*/
+        this.getCounters(counters, info);
         const contactF = this.getContactForm();//instance du formulaire
         const Modal = await contactF.buildModal();
         contactButton.addEventListener("click", function () { contactF.displayModal() });
         //(await Modal).modalContent;
-       // const contactTab = Modal.contactInfos;
+        // const contactTab = Modal.contactInfos;
         const sendButton = Modal.sendButton;
         contactF.sendInfos(sendButton);
         //initialiser le lightbox

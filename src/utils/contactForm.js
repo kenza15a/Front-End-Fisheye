@@ -27,12 +27,18 @@ export default class contactForm {
     }
 
     displayModal() {
+        //accéssibilité
+        //document.body.setAttribute('aria-hidden', 'true')
+
+        //ajouter hidder true to body 
         //  this.buildModal();
         const modal = document.getElementById("contact_modal");
         modal.style.display = "block";
     }
 
     closeModal() {
+        //   document.body.setAttribute('aria-hidden', 'false')
+
         const modal = document.getElementById("contact_modal");
         modal.style.display = "none";
     }
@@ -45,7 +51,7 @@ export default class contactForm {
         const modalContent = document.getElementById("contact_modal");
         const contactFormDiv = document.createElement("div");
         contactFormDiv.classList.add("modal");
-        contactFormDiv.setAttribute("role", "dialog"); //accessiblité
+        // contactFormDiv.setAttribute("role", "dialog"); //accessiblité
         contactFormDiv.innerHTML = `
        
         <header>
