@@ -84,7 +84,6 @@ export default class photographerPage {
         const mediaSection = document.querySelector('.photograph-media');
         var tabMedia = (await displayData).tabMedia;
         var name = (await displayData).Photographername;
-
         for (let i = 0; i < tabMedia.length; i++) {
             var NewMediafactory = new mediaFactory(tabMedia[i]);
             //verifier le type du media
@@ -102,11 +101,6 @@ export default class photographerPage {
             mediaSection.appendChild(mediaDom);
 
         }
-        //likes
-        let likesButtons = document.querySelectorAll(".fa-heart");
-        this.getLikes(likesButtons, tabMedia);
-        //initialiser le lightbox
-        lightbox.init();
         return mediaSection;
 
 
@@ -133,9 +127,9 @@ export default class photographerPage {
     /**
      * 
      * @param {array} likesButtons   l'ensemble des boutons likes
-     * @param {array} tabMedia   tabmedia tableau des media
+     * @param {array} counters   tabmedia tableau des media
      */
-    getLikes(likesButtons, tabMedia) {
+    getLikes(likesButtons, counters) {
         //var isClicked = [];
         let numberOfLikes = document.querySelectorAll('.number_of_Likes');
         let likesCounterDom = document.getElementById('likes_counter');
@@ -144,37 +138,34 @@ export default class photographerPage {
         // Ajout d'une propriété cliqué dans les objets de type Media pour maintenir l'état de clique
         // et éviter des doubles cliques en cas de sort 
 
-        for (let i = 0; i < tabMedia.length; i++) {
-            var tempObj = tabMedia[i];
-            //verification de la presence de la propriété clickstate 
-            // pour garder l'etat du click apres le tri
-            if (!('clickState' in tempObj)) {
-                Object.assign(tempObj, { clickState: false });
-            }
+        for (let i = 0; i < counters.length; i++) {
+            var tempObj = counters[i];
+            console.log(tempObj);
+            Object.assign(tempObj, { clickState: false });
             tempTab.push(tempObj);
             //likesCounter.push((await counters[i]).likes);          
 
         }
 
-        tabMedia = [];
-        tabMedia = tempTab;
-        console.log(tabMedia);
+        counters = [];
+        counters = tempTab;
+        console.log(counters);
 
         for (let i = 0; i < likesButtons.length; i++) {
 
             likesButtons[i].addEventListener("click", function () {
                 //alert("clicked");
-                if (tabMedia[i].clickState == false) {
+                if (counters[i].clickState == false) {
 
-                    tabMedia[i].clickState = true;
-                    tabMedia[i].likes = tabMedia[i].likes + 1;
+                    counters[i].clickState = true;
+                    counters[i].likes = counters[i].likes + 1;
 
-                    numberOfLikes[i].innerHTML = `<i class="number_of_Likes">${tabMedia[i].likes}</i>`;
+                    numberOfLikes[i].innerHTML = `<i class="number_of_Likes">${counters[i].likes}</i>`;
                     // Somme des likes après incrémentation dûe à un clique
                     let likesCounter = 0;
-                    for (let i = 0; i < tabMedia.length; i++) {
+                    for (let i = 0; i < counters.length; i++) {
 
-                        likesCounter = tabMedia[i].likes + likesCounter;
+                        likesCounter = counters[i].likes + likesCounter;
                     }
 
                     likesCounterDom.innerHTML = `<i class="number_of_Likes">${likesCounter}</i>`;
@@ -237,47 +228,45 @@ export default class photographerPage {
         contactF.sendInfos(sendButton);
 
 
-
+        //likes
+        let likesButtons = document.querySelectorAll(".fa-heart");
+        this.getLikes(likesButtons, counters);
 
         // traitement du sort --------------->les filtres
         //selectionner le dom du select
         let filters = document.getElementById("tri");
+        
 
+            filters.addEventListener("change", (e) => {
+                e.preventDefault();
+                let filterOprion = document.getElementById("tri").value;
+                if (filterOprion == "popularité") {
+                    //console.log("popularité choisi");
+                    this.sortBylikes(counters);
+                } else if (filterOprion == "titre") {
+                    //console.log("titre choisi");
+                    this.sortByTitle(counters);
 
-        filters.addEventListener("change", (e) => {
-            e.preventDefault();
-            let filterOprion = document.getElementById("tri").value;
-            if (filterOprion == "popularité") {
-                console.log("popularité choisi");
-                this.sortBylikes(counters);
+                } else {
+                    this.sortByDate(counters);
 
+                }
+
+                console.log("tableau trié par " + filterOprion);
                 console.log(counters);
-            } else if (filterOprion == "titre") {
-                console.log("titre choisi");
-                this.sortByTitle(counters);
-                console.log(counters);
-
-            } else {
-                console.log("date choisi");
-                this.sortByDate(counters);
-                console.log(counters);
-
-            }
-
-            console.log("tableau trié par " + filterOprion);
-            console.log(counters);
-            data.tabMedia = counters;
-            /* console.log("data tabmedia ");
-             console.log(data.tabMedia);*/
-            const mediaSection = document.querySelector('.photograph-media');
-            mediaSection.innerText = "";
-            this.displayMedia(data);
+                data.tabMedia = counters;
+               /* console.log("data tabmedia ");
+                console.log(data.tabMedia);*/
+                const mediaSection = document.querySelector('.photograph-media');
+                mediaSection.innerText = "";
+                this.displayMedia(data);
 
 
 
-        });
-
-
+            });
+        
+        //initialiser le lightbox
+        lightbox.init();
     }
 }
 

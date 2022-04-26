@@ -15,14 +15,11 @@ export default class lightbox {
         titlesHtml.forEach(title => {
             //  console.log(title.innerText);
             titles.push(title.innerText);
-
-
         });
         //recuperer les liens des images dans un map 
         const gallery = links.map(link => link.getAttribute('href'));
         links.forEach(link => link.addEventListener("click", function (e) {
             e.preventDefault();
-
             //recuperer le lien de l'elemt cliqué
             new lightbox(e.currentTarget.getAttribute('href'), gallery, titles);
         }));
