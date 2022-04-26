@@ -67,6 +67,14 @@
     animation: lightboxIn 0.5s;
     
 }
+.lightbox__video{
+    height: 50vh;
+    max-width: 100%;
+    margin-left: 15px;
+    margin-right: 15px;
+
+}
+
 
 
 .lightbox__loader{

@@ -18,7 +18,7 @@ export default class mediaFactory {
         </a>
         <div class="media-infos">
          <p class="media-title">${title}</P>
-         <span class="likes"><i class="fa-solid fa-heart"></i>${likes}</span>
+         <span class="likes"><i class="fa-solid fa-heart"></i><i class="number_of_Likes">${likes}</i></span>
         </div>
        
        `
@@ -33,7 +33,7 @@ export default class mediaFactory {
        </a>
         <div class="media-infos">
          <p class="media-title">${title}</P>
-         <span class="likes"><i class="fa-solid fa-heart"></i>${likes}</span>
+         <span class="likes"><i class="fa-solid fa-heart"></i><i class="number_of_Likes">${likes}</i></span>
         </div>
        `
 

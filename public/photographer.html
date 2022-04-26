@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
   <meta charset="utf-8">
@@ -20,21 +20,30 @@
 
   </header>
   <main id="main">
-    <div class="photograph-header">
+    <section class="photograph-header">
 
-    </div>
-    <div class="filters-section">
+    </section>
+    <section class="filters-section">
       <div class="filters-title">
         <h4>Trier Par:</h4>
       </div>
-      <div class="filters">
 
-      </div>
-    </div>
+      <section class="filters">
+        <select name="tri" id="tri">
+          <option value="popularité">popularité</option>
+          <option value="titre">par titre</option>
+          <option value="date">par date</option>
+        </select>
+        <span class="custom-arrow"><i class="fa-solid fa-chevron-down"></i></span>
+
+      </section>
+    </section>
+
+
 
     <section class="photograph-media" name="photograph-media">
-   
-     
+
+
     </section>
 
 
@@ -50,6 +59,7 @@
 
 <script type="module" src="../src/pages/photographerpage.js"></script>
 <script type="module" src="../src/utils/contactForm.js"></script>
-<script type="module" src="../src/utils/lightbox.js" defer></script>
+<!--<script type="module" src="../src/utils/lightbox.js" defer></script>-->
+
 
 </html>
