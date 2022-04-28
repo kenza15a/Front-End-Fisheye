@@ -13,7 +13,7 @@ export default class mediaFactory {
         // const mediaContent=
         if (mediaType[mediaType.length - 1] == 'jpg') {
             article.innerHTML = `
-        <a href="${pictureUrl}">
+        <a aria-label="miniature de l'image ${title} cliquer pour ouvrir la lightbox" href="${pictureUrl}">
         <img class="media" src="${pictureUrl}" alt="${title}">
         </a>
         <div class="media-infos">
@@ -26,7 +26,7 @@ export default class mediaFactory {
         } else {
 
         article.innerHTML = `
-        <a href="${pictureUrl}">
+        <a aria-label="miniature de la video ${title} cliquer pour ouvrir la lightbox" href="${pictureUrl}">
         <video  preload="metadata" class="media">
            <source src="${pictureUrl}#t=0.5" type="video/mp4">
         </video>

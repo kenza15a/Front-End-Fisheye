@@ -57,6 +57,9 @@
     cursor: pointer;
     /*margin-top: 0px;*/
 }
+.contact_button:focus {
+    border: #DB8876 solid 0.5px;
+}
 
 .modal {
     border-radius: 5px;
@@ -69,7 +72,12 @@
     padding: 35px;
     margin: auto;
 }
-
+.modal:focus {
+    border: #DB8876 solid 0.5px;
+}
+.modal:active{
+    border: #DB8876 solid 0.5px;
+}
 .modal header {
     justify-content: space-between;
     width: 100%;
@@ -171,7 +179,7 @@ article .media-wrapper {
     height: 200px;
     /*width: 30%;*/
     display: flex;
-    flex-direction: column;
+    flex-direction: c   olumn;
     margin-bottom: 20px;
 
 }
@@ -206,9 +214,8 @@ article .media-wrapper {
 
 /* filters*/
 
-
 .filters-section {
-    margin: 0 100px;
+    margin: 50px  100px;
     width: 250px;
     display: flex;
     flex-direction: row;
@@ -227,14 +234,23 @@ article .media-wrapper {
     border-radius: 5%;
     width: 100%;
     height: 40px;
-
-
+    font-weight: 200;
+    font-size: 18px;
 }
+
 .filters select::-ms-expand {
     display: none;
     }
 
+    .filter_option{
+        font-weight: 200;
+        font-size: 18px;
+    }
+    .filters-title p{
+        font-weight: 900;
+        font-size: 18px;
 
+    }
 
 .filters {
     margin-top: 10px;
@@ -284,4 +300,10 @@ article .media-wrapper {
 .div-counter {
     font-size: 500;
     padding: 15px;
+}
+
+/*accessibilté des a href dans index*/
+article a:focus   {
+    border: #DB8876 solid 0.5px;
+
 }

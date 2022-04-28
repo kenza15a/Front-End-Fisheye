@@ -8,6 +8,8 @@ export default class contactForm {
         //recuperer l'identifiant du photographe
         const urlParams = new URLSearchParams(window.location.search);
         this.photographerId = urlParams.get("photographerId");
+        this.onKeyUp = this.onKeyUp.bind(this);
+        document.addEventListener('keyup', this.onKeyUp);
     }
     //recuperer le nom du photographe
     async getPhotographerName() {
@@ -27,20 +29,29 @@ export default class contactForm {
     }
 
     displayModal() {
-        //accéssibilité
-        //document.body.setAttribute('aria-hidden', 'true')
-
-        //ajouter hidder true to body 
-        //  this.buildModal();
         const modal = document.getElementById("contact_modal");
         modal.style.display = "block";
+        //accéssibilité
+        //ajouter hidder true to body 
+        document.body.setAttribute("aria-hidden", "true");
+        document.getElementById('contact_modal').setAttribute("aria-hidden", "false");
+        document.querySelector(".modal").setAttribute("aria-hidden", "false");
     }
 
-    closeModal() {
-        //   document.body.setAttribute('aria-hidden', 'false')
-
+    closeModal() {              
         const modal = document.getElementById("contact_modal");
         modal.style.display = "none";
+        //accéssibilité
+        //ajouter hidden false to body 
+        document.body.setAttribute('aria-hidden', 'false');
+        document.querySelector("#contact_modal").setAttribute("aria-hidden", "true");
+        document.querySelector(".modal").setAttribute("aria-hidden", "true");
+    }
+    onKeyUp(e) {
+        if (e.key === "Escape") {
+            this.closeModal();
+        }
+
     }
 
     async buildModal() {
@@ -51,12 +62,13 @@ export default class contactForm {
         const modalContent = document.getElementById("contact_modal");
         const contactFormDiv = document.createElement("div");
         contactFormDiv.classList.add("modal");
-        // contactFormDiv.setAttribute("role", "dialog"); //accessiblité
+       /* contactFormDiv.setAttribute("role", "dialog");
+        contactFormDiv.setAttribute("aria-label", "formulaire de contact")*/
         contactFormDiv.innerHTML = `
        
-        <header>
-          <img class="closebutton" src="assets/icons/close.svg" />
-          <h2>Contactez-moi</br> ${photographerName}</h2> 
+        <header role="header" aria-label="header du contact modal"  >
+          <img class="closebutton" src="assets/icons/close.svg" alt="croix pour fermer le modal de contact" />
+          <h2 aria-label="${photographerName}">Contactez-moi</br> ${photographerName}</h2> 
           
         </header>
         <form action="photographer.html?photographerId=${id}" method="post" target="photograph-media">

@@ -8,8 +8,7 @@
     z-index: 10;
     overflow: auto;/*scrol image if it's big*/
     animation: lightboxIn 0.5s;
-}
-
+ }
 .lightbox__next, .lightbox__prev{
     position:fixed;
     z-index: 11;

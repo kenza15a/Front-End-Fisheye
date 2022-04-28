@@ -38,7 +38,7 @@ export default class photographerPage {
                 <h4 class="location">${infos.city},${infos.country}</h4>
                 <h5 class="tagline">${infos.tagline}</h5>
                 </div>
-                <button class="contact_button">Contactez-moi</button>
+                <button aria-label="bouton vers le modal de contact" class="contact_button">Contactez-moi</button>
                 <img role="img" alt="photo de ${infos.name}"class="profile_pic" src="assets/photographers/Photographers ID Photos/${infos.portrait}">`;
 
         //append le header
@@ -232,7 +232,8 @@ export default class photographerPage {
         //contact form
         const contactF = this.getContactForm();//instance du formulaire
         const Modal = await contactF.buildModal();
-        contactButton.addEventListener("click", function () { contactF.displayModal() });
+        contactButton.addEventListener("click", function () { 
+            contactF.displayModal() });
         const sendButton = Modal.sendButton;
         contactF.sendInfos(sendButton);
 

@@ -1,7 +1,7 @@
 
 
 /***
- * * @property {HtmlElement} element 
+ * * @property {HtmlElement} element la  lightbox dom
  * @property {string[]} images  chemin des images dans la lightbox
  *  * @property {string} url  chemin de l'image actuellemnt affichée
  * **/
@@ -9,19 +9,21 @@ export default class lightbox {
     static init() {
         //slectionner le liens qui mennents vers des images
         var links = Array.from(document.querySelectorAll('.photograph-media a[href$=".jpg"],a[href$=".mp4"]'));
+        //creer un tableau des titres de chaque image
         var titlesHtml = Array.from(document.querySelectorAll('.media-title'));
         var titles = [];
         //afficher le titre 
         titlesHtml.forEach(title => {
-            //  console.log(title.innerText);
+            //metre les titres dans un tableau titles
             titles.push(title.innerText);
         });
-        //recuperer les liens des images dans un map 
-        const gallery = links.map(link => link.getAttribute('href'));
+        //recuperer lattribut href de chaque element link dans un tableau  images
+        let images = links.map(link => link.getAttribute('href'));
         links.forEach(link => link.addEventListener("click", function (e) {
             e.preventDefault();
-            //recuperer le lien de l'elemt cliqué
-            new lightbox(e.currentTarget.getAttribute('href'), gallery, titles);
+            //recuperer le lien de l'element cliqué
+            //creer un nouveau object lightbox avec les attributs (url,images,titles)
+            new lightbox(e.currentTarget.getAttribute('href'), images, titles);
         }));
     }
 
@@ -36,12 +38,11 @@ export default class lightbox {
         this.images = images;
         this.url = url;
         this.titles = titles;
-        /*lancer l'venement keyup au constructeur*/
-        document.addEventListener('keyup', this.onKeyUp);
-        //--------------ajouter le titre du media au lightbox
+        /*lancer l'evenement keyup au constructeur*/
         this.element = this.buildDom(url);
         document.body.appendChild(this.element);
         this.onKeyUp = this.onKeyUp.bind(this);
+        document.addEventListener('keyup', this.onKeyUp);
 
 
     }
@@ -73,9 +74,8 @@ export default class lightbox {
         }
         let newUrl = this.images[i + 1];
         //vider le container avant de l'inserer de nouveau
-        const lightboxContainer = this.element.querySelector(".lightbox__container");
+        var lightboxContainer = this.element.querySelector(".lightbox__container");
         lightboxContainer.innerHTML = "";
-        //this.buildDom(newUrl);
         new lightbox(newUrl, this.images, this.titles);
 
     }
@@ -98,11 +98,11 @@ export default class lightbox {
         new lightbox(newUrl, this.images, this.titles);
 
     }
-      /***
-     * @param {Mousevent/keyboardevent} e
-     */
-       onKeyUp(e) {
-        if (e.key === "Escape") {
+    /***
+   * @param {Mousevent/keyboardevent} e
+   */
+    onKeyUp(e) {
+        if (e.keyCode == '27') {
             this.close(e);
         }
         if (e.keyCode == '39') {
@@ -117,6 +117,7 @@ export default class lightbox {
 
     buildDom(url) {
         // this.url = url;
+        //affecter les titres aux images de lightbox
         let title = "";
         for (let i = 0; i < this.images.length; i++) {
             if (this.images[i] == url) {
@@ -127,10 +128,11 @@ export default class lightbox {
 
         const domLightbox = document.createElement("div");
         domLightbox.classList.add("lightbox");
+        domLightbox.setAttribute("role", "dialog");
         domLightbox.innerHTML = `
-        <button class="lightbox__Close"><i class="fa-solid fa-xmark"></i></button>
-        <button class="lightbox__next"><i class="fa-solid fa-angle-right"></i></button>
-        <button class="lightbox__prev"><i class="fa-solid fa-angle-left"></i></button>
+        <button aria-label="fermer la lightbox "class="lightbox__Close"><i class="fa-solid fa-xmark"></i></button>
+        <button aria-label="image suivante "class="lightbox__next"><i class="fa-solid fa-angle-right"></i></button>
+        <button aria-label="image precedente "class="lightbox__prev"><i class="fa-solid fa-angle-left"></i></button>
         `;
 
         const lightboxContainer = document.createElement("div");
@@ -140,7 +142,7 @@ export default class lightbox {
         if (/\.(jpg)$/.test(url))//(url.match(/\.(jpg)$/)) { ///faq$/.test
         //put image in container
         {
-            lightboxContainer.innerHTML = `<img src="${url}" alt="image lightbox" title="${title}"></br>
+            lightboxContainer.innerHTML = `<img role="img" aria-label="image ouverte dans la lightbox " alt="${title}" src="${url}" alt="image lightbox" title="${title}"></br>
             <h4 class="image__title">${title}</h4>`;
 
         }

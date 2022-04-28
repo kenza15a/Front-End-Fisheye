@@ -23,16 +23,16 @@
     <section class="photograph-header">
 
     </section>
-    <section class="filters-section">
+    <section class="filters-section" aria-label="section des filtres ">
       <div class="filters-title">
-        <h4>Trier Par:</h4>
+        <p role="presentation" >Trier Par:</p>
       </div>
 
-      <section class="filters">
-        <select name="tri" id="tri">
-          <option value="popularité">popularité</option>
-          <option value="titre">par titre</option>
-          <option value="date">par date</option>
+      <section class="filters" aria-label="les differents filtres ">
+        <select name="tri" id="tri" role="listbox" aria-label="lancer le tri ">
+          <option class="filter_option" role="option" id="popularité">Popularité</option>
+          <option role="option" value="titre">Titre</option>
+          <option role="option" value="date">Date</option>
         </select>
         <span class="custom-arrow"><i class="fa-solid fa-chevron-down"></i></span>
 
@@ -41,19 +41,17 @@
 
 
 
-    <section class="photograph-media" name="photograph-media">
+    <section class="photograph-media" name="photograph-media" aria-label="media du photograph">
 
 
     </section>
-
+    <div class="bottom-counters">
+    </div>
 
   </main>
-
-  <div class="bottom-counters">
-  </div>
-  <section role="dialog" id="contact_modal">
-
+  <section id="contact_modal" role="dialog" aria-label="formulaire de contact">
   </section>
+
 
 </body>
 
