@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export default class mediaFactory {
     constructor(media) {
         this._media = media;
@@ -6,7 +7,7 @@ export default class mediaFactory {
     getMediaDom(pictureUrl) {
         const { id, photographerId, title, image, likes, date, price } = this._media;
         const article = document.createElement('article');
-        article.classList.add("media-wrapper");
+        article.classList.add('media-wrapper');
         // const thumbnail = `assets/photographers/Photographers ID Photos/${portrait}`;
         //trouver le chemin de la photo
         const mediaType = pictureUrl.split('.');
@@ -32,13 +33,13 @@ export default class mediaFactory {
         </video>
        </a>
         <div class="media-infos">
-         <p class="media-title">${title}</P>
-         <span class="likes"><i class="fa-solid fa-heart"></i><i class="number_of_Likes">${likes}</i></span>
+         <p class="media-title"><i class="fa-solid fa-play"></i>  ${title}</P>
+         <span class="likes"><i class="fa-solid fa-heart" role="button" aria-label="bouton j'aime"></i><i class="number_of_Likes">  ${likes}</i></span>
         </div>
        `
 
         }
-        var likesButton = document.querySelector(".likes");
+        var likesButton = document.querySelector('.likes');
         return { id, photographerId, article, likesButton }
     }
 

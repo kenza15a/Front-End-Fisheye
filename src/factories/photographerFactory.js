@@ -8,10 +8,10 @@ export default class photographerFactory {
     const article = document.createElement('article');
     //accessibilté des articles
     let ariaLabel=`carte du photographe ${name}`;
-    article.setAttribute("aria-label",ariaLabel);  
+    article.setAttribute('aria-label', ariaLabel);  
     const picture = `assets/photographers/Photographers ID Photos/${portrait}`;
     //objet de type photographer
-    article.classList.add("card");
+    article.classList.add('card');
     article.innerHTML = `<a   href="photographer.html?photographerId=${id}">
     <img role="img" src="assets/photographers/Photographers ID Photos/${portrait}" alt="photo de ${name}">
     <h2  aria-label="nom du photographe ${name}">${name}</h2>

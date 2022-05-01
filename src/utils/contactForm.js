@@ -1,19 +1,19 @@
 
 
 //impoter lapi pour un fetch des photographers
-import photographerApi from "../api/photographerApi.js";
+import photographerApi from '../api/photographerApi.js';
 export default class contactForm {
     constructor() {
 
         //recuperer l'identifiant du photographe
         const urlParams = new URLSearchParams(window.location.search);
-        this.photographerId = urlParams.get("photographerId");
+        this.photographerId = urlParams.get('photographerId');
         this.onKeyUp = this.onKeyUp.bind(this);
         document.addEventListener('keyup', this.onKeyUp);
     }
     //recuperer le nom du photographe
     async getPhotographerName() {
-        const url = "../data/photographers.json";
+        const url = '../data/photographers.json';
         const api = new photographerApi(url);
         const photographersData = (await api.getAllPhotographer()).photographers;
 
@@ -29,26 +29,26 @@ export default class contactForm {
     }
 
     displayModal() {
-        const modal = document.getElementById("contact_modal");
-        modal.style.display = "block";
+        const modal = document.getElementById('contact_modal');
+        modal.style.display = 'block';
         //accéssibilité
         //ajouter hidder true to body 
-        document.body.setAttribute("aria-hidden", "true");
-        document.getElementById('contact_modal').setAttribute("aria-hidden", "false");
-        document.querySelector(".modal").setAttribute("aria-hidden", "false");
+        document.body.setAttribute('aria-hidden', 'true');
+        document.getElementById('contact_modal').setAttribute('aria-hidden', 'false');
+        document.querySelector('.modal').setAttribute('aria-hidden', 'false');
     }
 
     closeModal() {              
-        const modal = document.getElementById("contact_modal");
-        modal.style.display = "none";
+        const modal = document.getElementById('contact_modal');
+        modal.style.display = 'none';
         //accéssibilité
         //ajouter hidden false to body 
         document.body.setAttribute('aria-hidden', 'false');
-        document.querySelector("#contact_modal").setAttribute("aria-hidden", "true");
-        document.querySelector(".modal").setAttribute("aria-hidden", "true");
+        document.querySelector('#contact_modal').setAttribute('aria-hidden', 'true');
+        document.querySelector('.modal').setAttribute('aria-hidden', 'true');
     }
     onKeyUp(e) {
-        if (e.key === "Escape") {
+        if (e.key === 'Escape') {
             this.closeModal();
         }
 
@@ -59,9 +59,9 @@ export default class contactForm {
         const photographerName = await this.getPhotographerName();
         /*console.log('photographers name');
         console.log(photographerName);*/
-        const modalContent = document.getElementById("contact_modal");
-        const contactFormDiv = document.createElement("div");
-        contactFormDiv.classList.add("modal");
+        const modalContent = document.getElementById('contact_modal');
+        const contactFormDiv = document.createElement('div');
+        contactFormDiv.classList.add('modal');
        /* contactFormDiv.setAttribute("role", "dialog");
         contactFormDiv.setAttribute("aria-label", "formulaire de contact")*/
         contactFormDiv.innerHTML = `
@@ -90,34 +90,34 @@ export default class contactForm {
 `;
         //apendchild
         modalContent.appendChild(contactFormDiv);
-        const closeButton = document.querySelector(".closebutton");
-        closeButton.addEventListener("click", () => {
+        const closeButton = document.querySelector('.closebutton');
+        closeButton.addEventListener('click', () => {
             this.closeModal()
         });
         /*("click",
             function () { modalContent.style.display = "none"; });*/
-        const sendButton = document.getElementById("sendButton");
+        const sendButton = document.getElementById('sendButton');
         return { modalContent, sendButton };
     }
 
     sendInfos(sendButton) {
-        sendButton.addEventListener("click", (e) => {
+        sendButton.addEventListener('click', (e) => {
             e.preventDefault();
             //recuperer les composant du formulaire
             const contactObj = {
-                firstName: document.getElementById("first").value,
-                lastName: document.getElementById("last").value,
-                email: document.getElementById("email").value,
-                message: document.getElementById("message").value
+                firstName: document.getElementById('first').value,
+                lastName: document.getElementById('last').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
             }
             //console.log(contactObj);
             //imprimer le contenu du formulaire
 
-            console.log("informations de contact ");
-            console.log("Prénom " + contactObj.firstName);
-            console.log("Nom " + contactObj.lastName);
-            console.log("E-mail " + contactObj.email);
-            console.log("Message " + contactObj.message);
+            console.log('informations de contact ');
+            console.log('Prénom ' + contactObj.firstName);
+            console.log('Nom ' + contactObj.lastName);
+            console.log('E-mail ' + contactObj.email);
+            console.log('Message ' + contactObj.message);
 
         });
 

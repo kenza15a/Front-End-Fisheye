@@ -1,22 +1,22 @@
 
-import mediaFactory from "../factories/mediaFactory.js";
+import mediaFactory from '../factories/mediaFactory.js';
 //impoter lapi pour un fetch des photographers
-import photographerApi from "../api/photographerApi.js";
+import photographerApi from '../api/photographerApi.js';
 //impoter lapi pour un fetch des media
-import mediaApi from "../api/mediaApi.js";
-import contactForm from "../utils/contactForm.js";
-import lightbox from "../utils/lightbox.js";
+import mediaApi from '../api/mediaApi.js';
+import contactForm from '../utils/contactForm.js';
+import lightbox from '../utils/lightbox.js';
 
 export default class photographerPage {
 
     constructor() {   //recuperer lid de l'url
         const urlParams = new URLSearchParams(window.location.search);
-        this.photographerId = urlParams.get("photographerId");
+        this.photographerId = urlParams.get('photographerId');
 
     }
     async generateHeader() {//genere le header
 
-        const url = "../data/photographers.json";
+        const url = '../data/photographers.json';
         const api = new photographerApi(url);
         const photographersData = (await api.getAllPhotographer()).photographers;
 
@@ -28,9 +28,9 @@ export default class photographerPage {
             }
         }
 
-        const photographerHeader = document.querySelector(".photograph-header");
+        const photographerHeader = document.querySelector('.photograph-header');
         const header = document.createElement('section');// creation de la section header 
-        header.classList.add("headerCard");//css
+        header.classList.add('headerCard');//css
         //insertion du html
         header.innerHTML = `
                 <div class="photographer-infos">
@@ -38,14 +38,14 @@ export default class photographerPage {
                 <h4 class="location">${infos.city},${infos.country}</h4>
                 <h5 class="tagline">${infos.tagline}</h5>
                 </div>
-                <button aria-label="bouton vers le modal de contact" class="contact_button">Contactez-moi</button>
+                <button aria-lalbel="bouton vers le modal de contact " class="contact_button">Contactez-moi</button>
                 <img role="img" alt="photo de ${infos.name}"class="profile_pic" src="assets/photographers/Photographers ID Photos/${infos.portrait}">`;
 
         //append le header
         photographerHeader.appendChild(header);
         //var infos = { id, name, city, country, tagline, portrait };
         //recuperer le bouton contactez-moi
-        const contactButton = document.querySelector(".contact_button");
+        const contactButton = document.querySelector('.contact_button');
         return { infos, contactButton };
     }
 
@@ -59,8 +59,7 @@ export default class photographerPage {
 
     async getMedia(Photographername) {
         /*fetch*/
-        const photographersSection = document.querySelector(".photographer_section");
-        const url = "../data/photographers.json";
+        const url = '../data/photographers.json';
         const api2 = new mediaApi(url);//mediaapi
         const photographerMedia = (await api2.getAllMedia()).media;
         var tabMedia = [];
@@ -69,7 +68,7 @@ export default class photographerPage {
                 tabMedia.push(photographerMedia[i])
             }
         }
-        console.log("Les medias du photographe \n :")
+        console.log('Les medias du photographe \n :')
         console.log(tabMedia)
         return { tabMedia, Photographername };
     }
@@ -89,10 +88,10 @@ export default class photographerPage {
             var NewMediafactory = new mediaFactory(tabMedia[i]);
             //verifier le type du media
             if ('image' in tabMedia[i]) {
-                var url = "../public/assets/photographers/" + name + "/" + tabMedia[i].image;
+                var url = '../public/assets/photographers/' + name + '/' + tabMedia[i].image;
             }
             else {
-                var url = "../public/assets/photographers/" + name + "/" + tabMedia[i].video;
+                 url = '../public/assets/photographers/' + name + '/' + tabMedia[i].video;
             }
             //console.log(url);
             var mediaDom = (await NewMediafactory.getMediaDom(url)).article;
@@ -103,7 +102,7 @@ export default class photographerPage {
 
         }
         //likes
-        let likesButtons = document.querySelectorAll(".fa-heart");
+        let likesButtons = document.querySelectorAll('.fa-heart');
         this.getLikes(likesButtons, tabMedia);
         //initialiser le lightbox
         lightbox.init();
@@ -123,7 +122,7 @@ export default class photographerPage {
         const price = infos.price;
         const divCounter = document.createElement('div');
         divCounter.innerHTML = ` <i class="fa-solid fa-heart"></i><i id="likes_counter" > ${likes}</i> , ${price}€/jours`;
-        divCounter.classList.add("div-counter");
+        divCounter.classList.add('div-counter');
         counterSection.appendChild(divCounter);
         return { likes, price };
 
@@ -158,11 +157,11 @@ export default class photographerPage {
 
         tabMedia = [];
         tabMedia = tempTab;
-        console.log(tabMedia);
+        //console.log(tabMedia);
 
         for (let i = 0; i < likesButtons.length; i++) {
 
-            likesButtons[i].addEventListener("click", function () {
+            likesButtons[i].addEventListener('click', function () {
                 //alert("clicked");
                 if (tabMedia[i].clickState == false) {
 
@@ -185,8 +184,6 @@ export default class photographerPage {
     }
     //sort media
     sortBylikes(tabMedia) {
-        const log = console.log;
-
         tabMedia.sort(function byLikes(a, b) {
             return parseInt(b.likes) - parseInt(a.likes); //inversed the a and b to make the sort descendent
 
@@ -195,7 +192,6 @@ export default class photographerPage {
 
     }
     sortByTitle(tabMedia) {
-        const log = console.log;
         tabMedia.sort(function byTitle(a, b) {
 
             if (a.title > b.title) {
@@ -210,9 +206,7 @@ export default class photographerPage {
 
     }
     sortByDate(tabMedia) {
-        const log = console.log;
-
-
+       
         tabMedia.sort(function byDate(a, b) {
             return new Date(a.date).valueOf() - new Date(b.date).valueOf();
         });
@@ -228,11 +222,11 @@ export default class photographerPage {
         this.displayMedia(data);
         //affichichage de prix et likes en bas
         let counters = (await data).tabMedia;
-        let numberOfLikes = this.getCounters(counters, info).likes;
+         this.getCounters(counters, info).likes;
         //contact form
         const contactF = this.getContactForm();//instance du formulaire
         const Modal = await contactF.buildModal();
-        contactButton.addEventListener("click", function () { 
+        contactButton.addEventListener('click', function () { 
             contactF.displayModal() });
         const sendButton = Modal.sendButton;
         contactF.sendInfos(sendButton);
@@ -242,36 +236,36 @@ export default class photographerPage {
 
         // traitement du sort --------------->les filtres
         //selectionner le dom du select
-        let filters = document.getElementById("tri");
+        let filters = document.getElementById('tri');
 
 
-        filters.addEventListener("change", (e) => {
+        filters.addEventListener('change', (e) => {
             e.preventDefault();
-            let filterOprion = document.getElementById("tri").value;
-            if (filterOprion == "popularité") {
-                console.log("popularité choisi");
+            let filterOprion = document.getElementById('tri').value;
+            if (filterOprion == 'popularité') {
+                console.log('popularité choisi');
                 this.sortBylikes(counters);
 
                 console.log(counters);
-            } else if (filterOprion == "titre") {
-                console.log("titre choisi");
+            } else if (filterOprion == 'titre') {
+                console.log('titre choisi');
                 this.sortByTitle(counters);
                 console.log(counters);
 
             } else {
-                console.log("date choisi");
+                console.log('date choisi');
                 this.sortByDate(counters);
                 console.log(counters);
 
             }
 
-            console.log("tableau trié par " + filterOprion);
+            console.log('tableau trié par ' + filterOprion);
             console.log(counters);
             data.tabMedia = counters;
             /* console.log("data tabmedia ");
              console.log(data.tabMedia);*/
             const mediaSection = document.querySelector('.photograph-media');
-            mediaSection.innerText = "";
+            mediaSection.innerText = '';
             this.displayMedia(data);
 
 

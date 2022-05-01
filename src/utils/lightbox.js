@@ -19,7 +19,7 @@ export default class lightbox {
         });
         //recuperer lattribut href de chaque element link dans un tableau  images
         let images = links.map(link => link.getAttribute('href'));
-        links.forEach(link => link.addEventListener("click", function (e) {
+        links.forEach(link => link.addEventListener('click', function (e) {
             e.preventDefault();
             //recuperer le lien de l'element cliqué
             //creer un nouveau object lightbox avec les attributs (url,images,titles)
@@ -53,8 +53,8 @@ export default class lightbox {
      */
     close(e) {
         e.preventDefault();
-        const lightboxOpendened = document.querySelector(".lightbox");
-        lightboxOpendened.classList.add("close__lightbox");
+        const lightboxOpendened = document.querySelector('.lightbox');
+        lightboxOpendened.classList.add('close__lightbox');
         //forcer l'arret au bout de 500ms
         window.setTimeout(() => { lightboxOpendened.remove() }, 500);
         //supprime levent keyup apres avooir fermer la fenetre
@@ -74,8 +74,8 @@ export default class lightbox {
         }
         let newUrl = this.images[i + 1];
         //vider le container avant de l'inserer de nouveau
-        var lightboxContainer = this.element.querySelector(".lightbox__container");
-        lightboxContainer.innerHTML = "";
+        var lightboxContainer = this.element.querySelector('.lightbox__container');
+        lightboxContainer.innerHTML = '';
         new lightbox(newUrl, this.images, this.titles);
 
     }
@@ -92,8 +92,8 @@ export default class lightbox {
         }
         let newUrl = this.images[i - 1];
         //vider le container avant de l'inserer de nouveau
-        const lightboxContainer = this.element.querySelector(".lightbox__container");
-        lightboxContainer.innerHTML = "";
+        const lightboxContainer = this.element.querySelector('.lightbox__container');
+        lightboxContainer.innerHTML = '';
         /*this.buildDom(newUrl);*/
         new lightbox(newUrl, this.images, this.titles);
 
@@ -118,7 +118,7 @@ export default class lightbox {
     buildDom(url) {
         // this.url = url;
         //affecter les titres aux images de lightbox
-        let title = "";
+        let title = '';
         for (let i = 0; i < this.images.length; i++) {
             if (this.images[i] == url) {
                 title = this.titles[i];
@@ -126,17 +126,17 @@ export default class lightbox {
             }
         }
 
-        const domLightbox = document.createElement("div");
-        domLightbox.classList.add("lightbox");
-        domLightbox.setAttribute("role", "dialog");
+        const domLightbox = document.createElement('div');
+        domLightbox.classList.add('lightbox');
+        domLightbox.setAttribute('role', 'dialog');
         domLightbox.innerHTML = `
         <button aria-label="fermer la lightbox "class="lightbox__Close"><i class="fa-solid fa-xmark"></i></button>
         <button aria-label="image suivante "class="lightbox__next"><i class="fa-solid fa-angle-right"></i></button>
         <button aria-label="image precedente "class="lightbox__prev"><i class="fa-solid fa-angle-left"></i></button>
         `;
 
-        const lightboxContainer = document.createElement("div");
-        lightboxContainer.classList.add("lightbox__container");
+        const lightboxContainer = document.createElement('div');
+        lightboxContainer.classList.add('lightbox__container');
 
         //verifier si le fichier est une image ou une video
         if (/\.(jpg)$/.test(url))//(url.match(/\.(jpg)$/)) { ///faq$/.test
