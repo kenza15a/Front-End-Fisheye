@@ -27,6 +27,10 @@
     font-size: 25px;
 
 }
+.modal form input:focus {
+    border: #000 1px solid;
+
+}
 
 .photograph-header {
     background-color: #FAFAFA;
@@ -247,8 +251,8 @@ article .media-wrapper {
         font-size: 18px;
     }
     .filters-title p{
-        font-weight: 900;
-        font-size: 18px;
+        font-weight: 600;
+        font-size: 15px;
 
     }
 
@@ -307,3 +311,19 @@ article a:focus   {
     border: #DB8876 solid 0.5px;
 
 }
+
+/*label caché pour accessiblité*/
+.hidden_label{
+    height: 1px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: -10000px;
+    width: 1px;
+}
+
+/*no scroll fo body*/
+.no-scroll {
+    overflow: hidden;
+ }
+ 

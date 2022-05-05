@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 
 
 //impoter lapi pour un fetch des photographers
@@ -30,12 +31,15 @@ export default class contactForm {
 
     displayModal() {
         const modal = document.getElementById('contact_modal');
+        const modalDiv = document.querySelector('.modal');
         modal.style.display = 'block';
         //accéssibilité
-        //ajouter hidder true to body 
+        //ajouter no scroll au body
+        document.body.classList.add('no-scrol');
         document.body.setAttribute('aria-hidden', 'true');
-        document.getElementById('contact_modal').setAttribute('aria-hidden', 'false');
-        document.querySelector('.modal').setAttribute('aria-hidden', 'false');
+        modal.setAttribute('aria-hidden', 'false');
+        modalDiv.setAttribute('aria-hidden', 'false');
+        modal.setAttribute('tabindex', '0'); 
     }
 
     closeModal() {              
@@ -43,9 +47,11 @@ export default class contactForm {
         modal.style.display = 'none';
         //accéssibilité
         //ajouter hidden false to body 
+        document.body.classList.remove('no-scrol');
         document.body.setAttribute('aria-hidden', 'false');
-        document.querySelector('#contact_modal').setAttribute('aria-hidden', 'true');
-        document.querySelector('.modal').setAttribute('aria-hidden', 'true');
+        modal.setAttribute('aria-hidden', 'true');
+        modal.setAttribute('tabindex', '-1'); 
+       
     }
     onKeyUp(e) {
         if (e.key === 'Escape') {
@@ -62,8 +68,8 @@ export default class contactForm {
         const modalContent = document.getElementById('contact_modal');
         const contactFormDiv = document.createElement('div');
         contactFormDiv.classList.add('modal');
-       /* contactFormDiv.setAttribute("role", "dialog");
-        contactFormDiv.setAttribute("aria-label", "formulaire de contact")*/
+       /* contactFormDiv.setAttribute("role", "dialog");*/
+        contactFormDiv.setAttribute('aria-hidden', 'true');
         contactFormDiv.innerHTML = `
        
         <header role="header" aria-label="header du contact modal"  >
@@ -73,18 +79,21 @@ export default class contactForm {
         </header>
         <form action="photographer.html?photographerId=${id}" method="post" target="photograph-media">
 
-    <div>
-
-      <label for="first">Prénom</label><br>
-      <input type="text" id="first" name="first" /><br>
-      <label for="last">Nom</label><br>
-      <input type="text" id="last" name="last" /><br>
-      <label for="email">E-mail</label><br>
-      <input id="email" name="email" /><br>
-      <label for="message">Message</label>
-      <textarea id="message" name="message" rows="5" cols="33"></textarea>
-    </div>
-    <button id="sendButton" class="contact_button">Envoyer</button>
+                 <div>
+                    <div role="group" id="coordonées"aria-labelledby="coordonées">
+                        <label for="first">Prénom</label><br>
+                        <input aria-required=true type="text" id="first" name="first" placeholder=" Votre prénom"  required/><br>
+                        <label for="last">Nom</label><br>
+                        <input aria-required=true type="text" id="last" name="last"  placeholder=" Votre Nom" required /><br>
+                        <label for="email">E-mail</label><br>
+                        <input aria-required=true id="email" name="email"  placeholder=" Votre Email" required/><br>
+                        <label for="message">Message</label>
+                    </div>
+                    <div  aria-labelledby="votre message">
+                    <textarea aria-required=true id="message" name="message" rows="5" cols="33"  placeholder=" Votre message (vous devez pas depasser les 5 lignes" required></textarea>
+                    </div>
+                  </div>
+    <button type="submit" id="sendButton" class="contact_button">Envoyer</button>
   </form>
 
 `;

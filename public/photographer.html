@@ -13,7 +13,7 @@
   <title>Fisheye - photographe </title>
 </head>
 
-<body>
+<body aria-hidden="false">
   <header aria-label="header de la page photographe" role="banner">
     <nav role="navigation" aria-label="Main navigation">
       <a href="index.html">
@@ -22,7 +22,7 @@
     </nav>
 
   </header>
-  <main id="main">
+  <main id="main" aria-hidden="true">
     <section class="photograph-header">
 
     </section>
@@ -32,8 +32,9 @@
       </div>
 
       <section class="filters" aria-label="les differents filtres ">
+        <label class="hidden_label">selectionner un tri pour filtrer les media </label>
         <select name="tri" id="tri" role="listbox" aria-label="lancer le tri ">
-          <option class="filter_option" role="option" id="popularité">Popularité</option>
+          <option role="option" class="filter_option" id="popularité">Popularité</option>
           <option role="option" value="titre">Titre</option>
           <option role="option" value="date">Date</option>
         </select>
@@ -51,10 +52,12 @@
     <div class="bottom-counters">
     </div>
 
-  </main>
-  <section id="contact_modal" role="dialog" aria-label="formulaire de contact">
-  </section>
 
+  </main>
+
+  <!--le modal de contact-->
+  <div aria-labelledby="modal de contact" aria-describedby="modal de contact" id="contact_modal" role="dialog" aria-labelledby="modal de contact" aria-hidden="true" tabindex="-1"> 
+  </div>
 
 </body>
 

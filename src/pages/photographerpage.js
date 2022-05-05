@@ -38,7 +38,7 @@ export default class photographerPage {
                 <h4 class="location">${infos.city},${infos.country}</h4>
                 <h5 class="tagline">${infos.tagline}</h5>
                 </div>
-                <button aria-lalbel="bouton vers le modal de contact " class="contact_button">Contactez-moi</button>
+                <button role="button" ="bouton vers le modal de contact " class="contact_button">Contactez-moi</button>
                 <img role="img" alt="photo de ${infos.name}"class="profile_pic" src="assets/photographers/Photographers ID Photos/${infos.portrait}">`;
 
         //append le header

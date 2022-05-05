@@ -129,6 +129,8 @@ export default class lightbox {
         const domLightbox = document.createElement('div');
         domLightbox.classList.add('lightbox');
         domLightbox.setAttribute('role', 'dialog');
+        //accessibilité
+        domLightbox.setAttribute('aria-label', 'lightbox des media');
         domLightbox.innerHTML = `
         <button aria-label="fermer la lightbox "class="lightbox__Close"><i class="fa-solid fa-xmark"></i></button>
         <button aria-label="image suivante "class="lightbox__next"><i class="fa-solid fa-angle-right"></i></button>
