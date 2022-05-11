@@ -1,11 +1,9 @@
-
-
 /***
  * * @property {HtmlElement} element la  lightbox dom
  * @property {string[]} images  chemin des images dans la lightbox
  *  * @property {string} url  chemin de l'image actuellemnt affichée
  * **/
-export default class lightbox {
+ export default class lightbox {
     static init() {
         //slectionner le liens qui mennents vers des images
         var links = Array.from(document.querySelectorAll('.photograph-media a[href$=".jpg"],a[href$=".mp4"]'));
@@ -19,7 +17,7 @@ export default class lightbox {
         });
         //recuperer lattribut href de chaque element link dans un tableau  images
         let images = links.map(link => link.getAttribute('href'));
-        links.forEach(link => link.addEventListener('click', function (e) {
+        links.forEach(link => link.addEventListener('click', function(e) {
             e.preventDefault();
             //recuperer le lien de l'element cliqué
             //creer un nouveau object lightbox avec les attributs (url,images,titles)
@@ -52,37 +50,42 @@ export default class lightbox {
      * @param {Mousevent/keyboardevent} e
      */
     close(e) {
-        e.preventDefault();
-        const lightboxOpendened = document.querySelector('.lightbox');
-        lightboxOpendened.classList.add('close__lightbox');
-        //forcer l'arret au bout de 500ms
-        window.setTimeout(() => { lightboxOpendened.remove() }, 500);
-        //supprime levent keyup apres avooir fermer la fenetre
-        document.removeEventListener('keyup', this.onKeyUp);
-    }
-    //image suivante
-    /***
-     * @param {Mousevent/keyboardevent} e
-     */
-    next(e) {
-        e.preventDefault();
-        //trouver l'indice de l'image affichée 
-        var i = this.images.findIndex(image => image === this.url);
-        // verifier si on a pas depasser le nombre des images dans la lightbox pour revenir au 0
-        if (i === this.images.length - 1) {
-            i = -1;
+            e.preventDefault();
+            const lightboxOpendened = document.querySelector('.lightbox');
+            lightboxOpendened.classList.add('close__lightbox');
+            //forcer l'arret au bout de 500ms
+            window.setTimeout(() => { lightboxOpendened.remove() }, 500);
+            //supprime levent keyup apres avooir fermer la fenetre
+            document.removeEventListener('keyup', this.onKeyUp);
+            document.body.setAttribute('aria-hidden', 'false');
         }
-        let newUrl = this.images[i + 1];
-        //vider le container avant de l'inserer de nouveau
-        var lightboxContainer = this.element.querySelector('.lightbox__container');
-        lightboxContainer.innerHTML = '';
-        new lightbox(newUrl, this.images, this.titles);
+        //image suivante
+        /***
+         * @param {Mousevent/keyboardevent} e
+         */
+    next(e) {
+            e.preventDefault();
+            //trouver l'indice de l'image affichée 
+            var i = this.images.findIndex(image => image === this.url);
+            // verifier si on n'a pas depasser le nombre des images dans la lightbox pour revenir au 0
+            /*if (i === this.images.length - 1) {
+                i = -1;
+            }*/
+            if(i == this.images.length-1){
+                i = -1;
+            }
+            let newUrl = this.images[i + 1];
+            //we need to remember the current media
+            this.url = newUrl;
+            //vider le container avant de l'inserer de nouveau
+            this.setLightboxData(this.url)
+                // new lightbox(newUrl, this.images, this.titles);
 
-    }
-    //image precedente
-    /***
-     * @param {Mousevent} e
-     */
+        }
+        //image precedente
+        /***
+         * @param {Mousevent} e
+         */
     prev(e) {
 
         e.preventDefault();
@@ -91,16 +94,49 @@ export default class lightbox {
             i = this.images.length;
         }
         let newUrl = this.images[i - 1];
+        this.url = newUrl;
         //vider le container avant de l'inserer de nouveau
-        const lightboxContainer = this.element.querySelector('.lightbox__container');
-        lightboxContainer.innerHTML = '';
-        /*this.buildDom(newUrl);*/
-        new lightbox(newUrl, this.images, this.titles);
+        this.setLightboxData(this.url)
 
     }
-    /***
-   * @param {Mousevent/keyboardevent} e
-   */
+
+    setLightboxData(newUrl) {
+            var lightboxContainer = document.querySelector('.lightbox__container');
+            document.querySelector('.lightbox')
+                .removeChild(document.querySelector('.lightbox__container'));
+
+
+            //lightboxContainer.innerHTML = "";
+
+            let title = '';
+            for (let i = 0; i < this.images.length; i++) {
+                if (this.images[i] == newUrl) {
+                    title = this.titles[i];
+                    break;
+                }
+            }
+
+            //verifier si le fichier est une image ou une video
+            if (/\.(jpg)$/.test(newUrl)) //(url.match(/\.(jpg)$/)) { ///faq$/.test
+            //put image in container
+            {
+                lightboxContainer.innerHTML = `<img role="img" aria-label="image ouverte dans la lightbox " alt="${title}" src="${newUrl}" alt="image lightbox" title="${title}"></br>
+                    <h4 class="image__title">${title}</h4>`;
+
+            } else {
+                //alert("it's a video");
+                lightboxContainer.innerHTML = `
+                    <video class="lightbox__video" controls="controls" role="video">
+                    <source src="${newUrl}" type="video/mp4">
+                    </video></br>
+                    <h4 class="image__title">${title}</h4>`;
+            }
+            //append le container
+            document.querySelector('.lightbox').appendChild(lightboxContainer);
+        }
+        /***
+         * @param {Mousevent/keyboardevent} e
+         */
     onKeyUp(e) {
         if (e.keyCode == '27') {
             this.close(e);
@@ -141,14 +177,13 @@ export default class lightbox {
         lightboxContainer.classList.add('lightbox__container');
 
         //verifier si le fichier est une image ou une video
-        if (/\.(jpg)$/.test(url))//(url.match(/\.(jpg)$/)) { ///faq$/.test
+        if (/\.(jpg)$/.test(url)) //(url.match(/\.(jpg)$/)) { ///faq$/.test
         //put image in container
         {
             lightboxContainer.innerHTML = `<img role="img" aria-label="image ouverte dans la lightbox " alt="${title}" src="${url}" alt="image lightbox" title="${title}"></br>
             <h4 class="image__title">${title}</h4>`;
 
-        }
-        else {
+        } else {
             //alert("it's a video");
             lightboxContainer.innerHTML = `
             <video class="lightbox__video" controls="controls" role="video">
@@ -176,4 +211,3 @@ export default class lightbox {
 
 }
 //lightbox.init();
-

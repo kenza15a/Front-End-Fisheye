@@ -27,13 +27,15 @@ export default class mediaFactory {
         } else {
 
         article.innerHTML = `
-        <a aria-label="miniature de la video ${title} cliquer pour ouvrir la lightbox" href="${pictureUrl}">
+        <a class="video-container" aria-label="miniature de la video ${title} cliquer pour ouvrir la lightbox" href="${pictureUrl}">
         <video  preload="metadata" class="media">
            <source src="${pictureUrl}#t=0.5" type="video/mp4">
         </video>
+     
+        <img class="play-icone" src="../public/assets/images/play-small.png" >
        </a>
         <div class="media-infos">
-         <p class="media-title"><i class="fa-solid fa-play"></i>  ${title}</P>
+         <p class="media-title"> ${title}</P>
          <span class="likes"><i class="fa-solid fa-heart" role="button" aria-label="bouton j'aime"></i><i class="number_of_Likes">  ${likes}</i></span>
         </div>
        `
