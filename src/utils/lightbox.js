@@ -41,12 +41,12 @@ export default class lightbox {
         document.body.appendChild(this.element);
         this.onKeyUp = this.onKeyUp.bind(this);
         document.addEventListener('keyup', this.onKeyUp);
-         //acessibilté
-         document.body.setAttribute('aria-hidden', 'true');
-         document.body.classList.add('no-scrol');
-         document.querySelector('.lightbox').setAttribute('aria-hidden', 'false');
-         document.querySelector('.lightbox').focus();
-         document.querySelector('.lightbox__Close').focus();
+        //acessibilté de la lightbox
+        document.body.setAttribute('aria-hidden', 'true');
+        document.body.classList.add('no-scrol');
+        document.querySelector('.lightbox').setAttribute('aria-hidden', 'false');
+        document.querySelector('.lightbox').focus();
+        document.querySelector('.lightbox__Close').focus();
 
 
     }
@@ -111,7 +111,7 @@ export default class lightbox {
         //on enleve le contenu actuel de la  lightbox 
         document.querySelector('.lightbox')
             .removeChild(document.querySelector('.lightbox__container'));
-            /*recuperation des titres*/
+        /*recuperation des titres*/
         let title = '';
         for (let i = 0; i < this.images.length; i++) {
             if (this.images[i] == newUrl) {

@@ -40,10 +40,10 @@ export default class contactForm {
         modal.setAttribute('aria-hidden', 'false');
         modal.focus();
         modalDiv.setAttribute('aria-hidden', 'false');
-        modal.setAttribute('tabindex', '0'); 
+        modal.setAttribute('tabindex', '0');
     }
 
-    closeModal() {              
+    closeModal() {
         const modal = document.getElementById('contact_modal');
         modal.style.display = 'none';
         //accéssibilité
@@ -51,8 +51,8 @@ export default class contactForm {
         document.body.classList.remove('no-scrol');
         document.body.setAttribute('aria-hidden', 'false');
         modal.setAttribute('aria-hidden', 'true');
-        modal.setAttribute('tabindex', '-1'); 
-       
+        modal.setAttribute('tabindex', '-1');
+
     }
     onKeyUp(e) {
         if (e.key === 'Escape') {
@@ -69,7 +69,7 @@ export default class contactForm {
         const modalContent = document.getElementById('contact_modal');
         const contactFormDiv = document.createElement('div');
         contactFormDiv.classList.add('modal');
-       /* contactFormDiv.setAttribute("role", "dialog");*/
+        /* contactFormDiv.setAttribute("role", "dialog");*/
         contactFormDiv.setAttribute('aria-hidden', 'true');
         contactFormDiv.innerHTML = `
        
