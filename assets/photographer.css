@@ -214,6 +214,7 @@ article .media-wrapper {
 .media-infos .likes {
     width: 25%;
     margin-top: 15px;
+    cursor: pointer;
 
 }
 
