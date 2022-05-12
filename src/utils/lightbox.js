@@ -41,6 +41,12 @@ export default class lightbox {
         document.body.appendChild(this.element);
         this.onKeyUp = this.onKeyUp.bind(this);
         document.addEventListener('keyup', this.onKeyUp);
+         //acessibilté
+         document.body.setAttribute('aria-hidden', 'true');
+         document.body.classList.add('no-scrol');
+         document.querySelector('.lightbox').setAttribute('aria-hidden', 'false');
+         document.querySelector('.lightbox').focus();
+         document.querySelector('.lightbox__Close').focus();
 
 
     }
@@ -102,16 +108,10 @@ export default class lightbox {
 
     setLightboxData(newUrl) {
         var lightboxContainer = document.querySelector('.lightbox__container');
+        //on enleve le contenu actuel de la  lightbox 
         document.querySelector('.lightbox')
             .removeChild(document.querySelector('.lightbox__container'));
-        //acessibilté
-        document.body.setAttribute('aria-hidden', 'true');
-        document.querySelector('.lightbox').setAttribute('aria-hidden', 'false');
-        document.querySelector('.lightbox').focus();
-
-
-        //lightboxContainer.innerHTML = "";
-
+            /*recuperation des titres*/
         let title = '';
         for (let i = 0; i < this.images.length; i++) {
             if (this.images[i] == newUrl) {
@@ -168,7 +168,6 @@ export default class lightbox {
 
         const domLightbox = document.createElement('div');
         domLightbox.classList.add('lightbox');
-        document.body.setAttribute('aria-hidden', 'true');
         domLightbox.setAttribute('role', 'dialog');
         //      domLightbox.focus();
         //accessibilité
@@ -202,8 +201,6 @@ export default class lightbox {
         domLightbox.appendChild(lightboxContainer);
 
         //close
-        //accessibilité
-        domLightbox.querySelector('.lightbox__Close').focus();
         domLightbox.querySelector('.lightbox__Close').addEventListener('click',
             this.close.bind(this));
 
