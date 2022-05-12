@@ -38,6 +38,7 @@ export default class contactForm {
         document.body.classList.add('no-scrol');
         document.body.setAttribute('aria-hidden', 'true');
         modal.setAttribute('aria-hidden', 'false');
+        modal.focus();
         modalDiv.setAttribute('aria-hidden', 'false');
         modal.setAttribute('tabindex', '0'); 
     }
@@ -72,8 +73,8 @@ export default class contactForm {
         contactFormDiv.setAttribute('aria-hidden', 'true');
         contactFormDiv.innerHTML = `
        
-        <header role="header" aria-label="header du contact modal"  >
-          <img class="closebutton" src="assets/icons/close.svg" alt="croix pour fermer le modal de contact" />
+        <header id="modal_de_contact"role="header" aria-label="header du contact modal"  >
+          <img class="closebutton" src="assets/icons/close.svg" alt="Fermer le modal de contact" />
           <h2 aria-label="${photographerName}">Contactez-moi</br> ${photographerName}</h2> 
           
         </header>

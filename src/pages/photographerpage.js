@@ -33,12 +33,12 @@ export default class photographerPage {
         header.classList.add('headerCard');//css
         //insertion du html
         header.innerHTML = `
-                <div class="photographer-infos">
+                <div class="photographer-infos" aria-label="infos du photographe">
                 <h2>${infos.name}</h2>
                 <h4 class="location">${infos.city},${infos.country}</h4>
                 <h5 class="tagline">${infos.tagline}</h5>
                 </div>
-                <button role="button" ="bouton vers le modal de contact " class="contact_button">Contactez-moi</button>
+                <button  aria-label="bouton vers le modal de contact " class="contact_button">Contactez-moi</button>
                 <img role="img" alt="photo de ${infos.name}"class="profile_pic" src="assets/photographers/Photographers ID Photos/${infos.portrait}">`;
 
         //append le header
