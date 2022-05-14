@@ -267,7 +267,7 @@ export default class photographerPage {
             const mediaSection = document.querySelector('.photograph-media');
             mediaSection.innerText = '';
             this.displayMedia(data);
-
+  
 
 
         });

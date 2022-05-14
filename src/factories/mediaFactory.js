@@ -25,6 +25,7 @@ export default class mediaFactory {
        `
 
         } else {
+            
 
         article.innerHTML = `
         <a class="video-container" aria-label="miniature de la video ${title} cliquer pour ouvrir la lightbox" href="${pictureUrl}">
