@@ -33,10 +33,10 @@
 
       <section class="filters" aria-label="les differents filtres ">
         <label class="hidden_label">selectionner un tri pour filtrer les media </label>
-        <select name="tri" id="tri"  aria-label="lancer le tri ">
-          <option class="filter_option" id="popularité">Popularité</option>
-          <option  value="titre">Titre</option>
-          <option  value="date">Date</option>
+        <select name="tri" id="tri" role="listbox" aria-label="lancer le tri ">
+          <option role="option" class="filter_option" id="popularité">Popularité</option>
+          <option role="option" value="titre">Titre</option>
+          <option role="option" value="date">Date</option>
         </select>
         <span class="custom-arrow"><i class="fa-solid fa-chevron-down"></i></span>
 
@@ -56,7 +56,7 @@
   </main>
 
   <!--le modal de contact-->
-  <div  id="contact_modal" role="dialog"  aria-hidden="true"> 
+  <div aria-labelledby="modal_de_contact" aria-describedby="modal_de_contact" id="contact_modal" role="dialog"  aria-hidden="true"> 
   </div>
   <script type="module" src="../src/pages/photographerpage.js"></script>
   <script type="module" src="../src/utils/contactForm.js"></script>
